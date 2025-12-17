@@ -14,4 +14,9 @@ public class StudentValidation{
     @NotBlank(message="no spaces")
     @Email(message="Invalid")
     private String email;
+
+    public class StudentValidation(){
+        
+    }
+    
 }
