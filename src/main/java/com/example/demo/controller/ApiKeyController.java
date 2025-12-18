@@ -22,14 +22,12 @@ public class ApiKeyController {
         this.apiKeyService = apiKeyService;
     }
 
-    // POST / - Create API key
     @PostMapping
     public ResponseEntity<ApiKey> create(@RequestBody ApiKey apiKey) {
         ApiKey created = apiKeyService.create(apiKey);
         return new ResponseEntity<>(created, HttpStatus.CREATED);
     }
 
-    // PUT /{id} - Update API key
     @PutMapping("/{id}")
     public ResponseEntity<ApiKey> update(
             @PathVariable Long id,
@@ -39,20 +37,17 @@ public class ApiKeyController {
         return ResponseEntity.ok(updated);
     }
 
-    // GET /{id} - Get API key by ID
     @GetMapping("/{id}")
-    public ResponseEntity<ApiKeyEntity> getById(@PathVariable Long id) {
-        ApiKeyEntity apiKey = apiKeyService.getById(id);
+    public ResponseEntity<ApiKey> getById(@PathVariable Long id) {
+        ApiKey apiKey = apiKeyService.getById(id);
         return ResponseEntity.ok(apiKey);
     }
 
-    // GET / - List all keys
     @GetMapping
-    public ResponseEntity<List<ApiKeyEntity>> getAll() {
+    public ResponseEntity<List<ApiKey>> getAll() {
         return ResponseEntity.ok(apiKeyService.getAll());
     }
 
-    // PUT /{id}/deactivate - Deactivate key
     @PutMapping("/{id}/deactivate")
     public ResponseEntity<Void> deactivate(@PathVariable Long id) {
         apiKeyService.deactivate(id);
