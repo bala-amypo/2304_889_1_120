@@ -12,6 +12,7 @@ public class QuotaPlan {
     @Column(unique = true)
     private String planName;
 
+    @Min(0)
     private int dailyLimit;
     private String description;
     private Boolean active;
