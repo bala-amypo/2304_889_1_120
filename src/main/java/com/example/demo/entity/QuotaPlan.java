@@ -1,70 +1,38 @@
 package com.example.demo.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Min;
 
 @Entity
+@Table(name = "quota_plans")
 public class QuotaPlan {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(unique = true)
-    private String planName;
+    private String name;
 
-    @Min(0)
-    private int dailyLimit;
-    private String description;
-    private Boolean active;
-
-    public QuotaPlan() {
-    }
-
-    public QuotaPlan(String planName, int dailyLimit, String description, Boolean active) {
-        this.planName = planName;
-        this.dailyLimit = dailyLimit;
-        this.description = description;
-        this.active = active;
-    }
+    @Min(1)
+    private int requestLimit;
 
     public Long getId() {
         return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public String getName() {
+        return name;
     }
 
-    public String getPlanName() {
-        return planName;
+    public int getRequestLimit() {
+        return requestLimit;
     }
 
-    public void setPlanName(String planName) {
-        this.planName = planName;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public int getDailyLimit() {
-        return dailyLimit;
+    public void setRequestLimit(int requestLimit) {
+        this.requestLimit = requestLimit;
     }
-
-    public void setDailyLimit(int dailyLimit) {
-        this.dailyLimit = dailyLimit;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public Boolean getActive() {
-        return active;
-    }
-
-    public void setActive(Boolean active) {
-        this.active = active;
-    }
-
 }
