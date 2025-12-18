@@ -3,10 +3,13 @@ import java.util.*;
 import java.sql.Timestamp;
 import jakarta.persistence.*;
 
+@Entity
+@Table(name="ApiKey")
 public class ApiKeyEntity {
     @Table(name="ApiKey")
 
     @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id; 
 
     @Column(unique=true)              
