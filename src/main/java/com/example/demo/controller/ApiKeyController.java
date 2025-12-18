@@ -1,19 +1,15 @@
 package com.example.demo.controller;
 
-import java.util.List;
-
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import com.example.demo.enity.ApiKey;
+import com.example.demo.service.ApiKeyService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.web.bind.annotation.*;
 
-import com.example.demo.entity.ApiKey;
-import com.example.demo.service.ApiKeyService;
-
-import io.swagger.v3.oas.annotations.tags.Tag;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/api-keys")
-@Tag(name = "API Keys", description = "Manage API keys")
+@Tag(name = "API Keys")
 public class ApiKeyController {
 
     private final ApiKeyService apiKeyService;
@@ -23,34 +19,32 @@ public class ApiKeyController {
     }
 
     @PostMapping
-    public ResponseEntity<ApiKey> create(@RequestBody ApiKey apiKey) {
-        ApiKey created = apiKeyService.create(apiKey);
-        return new ResponseEntity<>(created, HttpStatus.CREATED);
+    public ApiKey createApiKey(@RequestBody ApiKey apiKey) {
+        return apiKeyService.createApiKey(apiKey);
     }
 
+    // PUT /api/api-keys/{id}
     @PutMapping("/{id}")
-    public ResponseEntity<ApiKey> update(
-            @PathVariable Long id,
-            @RequestBody ApiKey apiKey) {
-
-        ApiKey updated = apiKeyService.update(id, apiKey);
-        return ResponseEntity.ok(updated);
+    public ApiKey updateApiKey(@PathVariable Long id,
+                               @RequestBody ApiKey apiKey) {
+        return apiKeyService.updateApiKey(id, apiKey);
     }
 
+    // GET /api/api-keys/{id}
     @GetMapping("/{id}")
-    public ResponseEntity<ApiKey> getById(@PathVariable Long id) {
-        ApiKey apiKey = apiKeyService.getById(id);
-        return ResponseEntity.ok(apiKey);
+    public ApiKey getApiKeyById(@PathVariable Long id) {
+        return apiKeyService.getApiKeyById(id);
     }
 
+    // GET /api/api-keys
     @GetMapping
-    public ResponseEntity<List<ApiKey>> getAll() {
-        return ResponseEntity.ok(apiKeyService.getAll());
+    public List<ApiKey> getAllApiKeys() {
+        return apiKeyService.getAllApiKeys();
     }
 
+    // PUT /api/api-keys/{id}/deactivate
     @PutMapping("/{id}/deactivate")
-    public ResponseEntity<Void> deactivate(@PathVariable Long id) {
-        apiKeyService.deactivate(id);
-        return ResponseEntity.noContent().build();
+    public void deactivateApiKey(@PathVariable Long id) {
+        apiKeyService.deactivateApiKey(id);
     }
 }
