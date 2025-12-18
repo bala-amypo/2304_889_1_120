@@ -4,6 +4,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import com.example.demo.entity.ApiKeyEntity;
 
 @Repository
-public interface Repo extends JpaRepository<ApiKeyEntity,Long>{
+public interface Q extends JpaRepository<ApiKeyEntity,Long>{
 
 }
