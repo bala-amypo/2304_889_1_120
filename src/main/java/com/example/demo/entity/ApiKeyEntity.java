@@ -13,7 +13,8 @@ public class ApiKeyEntity {
     private String keyValue;  
 
     private Long ownerId;
-           
+
+         
     private QuotaPlan plan;         
     private Boolean active;         
     private Timestamp createdAt;    
@@ -24,7 +25,7 @@ public class ApiKeyEntity {
         this.keyValue = keyValue;
         this.ownerId = ownerId;
         this.plan = plan;
-        this.active = (active == null) ? true : active;
+        this.active = active;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
     }
