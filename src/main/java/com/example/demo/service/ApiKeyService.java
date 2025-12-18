@@ -8,5 +8,6 @@ public interface ApiKeyService{
     ApiKey create(ApiKey api);
     ApiKey update(Long id,ApiKey api);
     ApiKey getById(Long id);
-    ApiKey
+    List<ApiKey> getAll();
+    void deactivate(Long id);
 }
