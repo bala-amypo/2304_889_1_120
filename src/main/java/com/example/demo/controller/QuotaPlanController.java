@@ -16,32 +16,27 @@ public class QuotaPlanController {
         this.quotaPlanService = quotaPlanService;
     }
 
-    // CREATE
     @PostMapping
     public QuotaPlan create(@RequestBody QuotaPlan plan) {
         return quotaPlanService.create(plan);
     }
 
-    // UPDATE
     @PutMapping("/{id}")
     public QuotaPlan update(@PathVariable Long id,
                             @RequestBody QuotaPlan plan) {
         return quotaPlanService.update(id, plan);
     }
 
-    // GET BY ID
     @GetMapping("/{id}")
     public QuotaPlan getById(@PathVariable Long id) {
         return quotaPlanService.getById(id);
     }
 
-    // GET ALL
     @GetMapping
     public List<QuotaPlan> getAll() {
         return quotaPlanService.getAll();
     }
 
-    // DEACTIVATE
     @DeleteMapping("/{id}")
     public void deactivate(@PathVariable Long id) {
         quotaPlanService.deactivate(id);

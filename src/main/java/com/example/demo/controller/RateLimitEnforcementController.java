@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/rate-limit-enforcements")
+@RequestMapping("/api/enforcements")
 @Tag(name = "Rate Limit Enforcement")
 public class RateLimitEnforcementController {
 
