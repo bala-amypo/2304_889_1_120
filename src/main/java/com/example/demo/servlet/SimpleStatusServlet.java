@@ -1,1 +1,3 @@
-public class Simple
+public class SimpleStatusServlet(){
+    
+}
