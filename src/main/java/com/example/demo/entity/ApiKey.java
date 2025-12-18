@@ -1,28 +1,33 @@
-package com.example.demo.enity;
-import java.util.*;
+package com.example.demo.entity;
+
 import java.sql.Timestamp;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.*;
 
 @Entity
-@Table(name="ApiKey")
-public class ApiKey(){
-    @Table(name="ApiKey")
+@Table(name = "api_keys")
+public class ApiKey {
 
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
-    private Long id; 
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-    @Column(unique=true)              
-    private String keyValue;  
+    @Column(unique = true, nullable = false)
+    private String keyValue;
 
     private Long ownerId;
-        
-    private Boolean active;         
-    private Timestamp createdAt;    
-    private Timestamp updatedAt;    
 
-    public ApiKey(Long id, String keyValue, Long ownerId, QuotaPlan plan, Boolean active, Timestamp createdAt, Timestamp updatedAt) {
+    private Boolean active;
+
+    private Timestamp createdAt;
+    private Timestamp updatedAt;
+
+    public ApiKey() {
+        this.active = true;
+    }
+
+    public ApiKey(Long id, String keyValue, Long ownerId,
+                  Boolean active, Timestamp createdAt,
+                  Timestamp updatedAt) {
         this.id = id;
         this.keyValue = keyValue;
         this.ownerId = ownerId;
@@ -31,14 +36,9 @@ public class ApiKey(){
         this.updatedAt = updatedAt;
     }
 
-    public ApiKey() {
-        this.active = true;
-    }
-
     public Long getId() {
         return id;
     }
-
     public void setId(Long id) {
         this.id = id;
     }
@@ -46,7 +46,6 @@ public class ApiKey(){
     public String getKeyValue() {
         return keyValue;
     }
-
     public void setKeyValue(String keyValue) {
         this.keyValue = keyValue;
     }
@@ -54,7 +53,6 @@ public class ApiKey(){
     public Long getOwnerId() {
         return ownerId;
     }
-
     public void setOwnerId(Long ownerId) {
         this.ownerId = ownerId;
     }
@@ -62,7 +60,6 @@ public class ApiKey(){
     public Boolean getActive() {
         return active;
     }
-
     public void setActive(Boolean active) {
         this.active = active;
     }
@@ -70,7 +67,6 @@ public class ApiKey(){
     public Timestamp getCreatedAt() {
         return createdAt;
     }
-
     public void setCreatedAt(Timestamp createdAt) {
         this.createdAt = createdAt;
     }
@@ -78,7 +74,6 @@ public class ApiKey(){
     public Timestamp getUpdatedAt() {
         return updatedAt;
     }
-
     public void setUpdatedAt(Timestamp updatedAt) {
         this.updatedAt = updatedAt;
     }
