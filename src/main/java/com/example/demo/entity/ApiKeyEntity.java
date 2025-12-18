@@ -1,11 +1,16 @@
 package com.example.demo.enity;
-import java.util.
+import java.util.*;
 import java.sql.Timestamp;
+import jakarta.persistence.*;
 
 public class ApiKeyEntity {
-    
-    private Long id;               
-    private String keyValue;        
+
+    @Id
+    private Long id; 
+
+    @Column(unique=true)              
+    private String keyValue;  
+
     private Long ownerId;           
     private QuotaPlan plan;         
     private Boolean active;         
