@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 
 public class ApiKeyEntity {
     @Table(name="ApiKey")
-    
+
     @Id
     private Long id; 
 
@@ -13,8 +13,7 @@ public class ApiKeyEntity {
     private String keyValue;  
 
     private Long ownerId;
-
-    @           
+           
     private QuotaPlan plan;         
     private Boolean active;         
     private Timestamp createdAt;    
