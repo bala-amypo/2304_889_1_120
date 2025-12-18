@@ -16,9 +16,7 @@ public class ApiKey {
     private String keyValue;  
 
     private Long ownerId;
-
-         
-    private QuotaPlan plan;         
+        
     private Boolean active;         
     private Timestamp createdAt;    
     private Timestamp updatedAt;    
@@ -27,7 +25,6 @@ public class ApiKey {
         this.id = id;
         this.keyValue = keyValue;
         this.ownerId = ownerId;
-        this.plan = plan;
         this.active = active;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
