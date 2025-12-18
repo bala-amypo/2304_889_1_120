@@ -3,7 +3,7 @@ package com.example.demo.entity;
 import java.sql.Timestamp;
 
 @Entity
-public class RateLimitEnforcement(){
+public class KeyExemption(){
    private Long id;
    private String notes;
    private Boolean unlimitedAccess;
