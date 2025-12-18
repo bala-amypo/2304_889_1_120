@@ -16,6 +16,9 @@ public class ApiKeyController{
 
     @PostMapping
 
+    @GetMapping()
     @GetMapping
-    public
+    public List<ApiKeyEntity> getAll(){
+        return a.findAll();
+    }
 }
