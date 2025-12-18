@@ -1,10 +1,10 @@
-package com.example.demo.newrepository;
-import org.springframework.data.jpa.newrepository.JpaRepository;
+package com.example.demo.repository;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.example.demo.newentity.StudentValidation;
+import com.example.demo.entity.ApiKeyEntity;
 
 @Repository
-public interface  NewStudentRepo extends JpaRepository<StudentValidation,Long>{
+public interface Repo extends JpaRepository<ApiKeyEntity,Long>{
 
 }
