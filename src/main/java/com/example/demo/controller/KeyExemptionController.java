@@ -24,8 +24,7 @@ public class KeyExemptionController {
     }
 
     @PutMapping("/{id}")
-    public KeyExemption update(@PathVariable Long id,
-                               @RequestBody KeyExemption exemption) {
+    public KeyExemption update(@PathVariable Long id,@RequestBody KeyExemption exemption) {
         return keyExemptionService.updateExemption(id, exemption);
     }
 
