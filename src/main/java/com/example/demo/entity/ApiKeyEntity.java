@@ -1,5 +1,7 @@
 package com.example.demo.entity
 
-public class StudentEntity(){
-
+public class ApiKeyEntity(){
+    private Long id;
+    private String keyValue;
+    
 }
