@@ -6,7 +6,7 @@ import jakarta.validation.constraints.*;
 
 @Entity
 @Table(name="ApiKey")
-public class ApiKey {
+public class ApiKey(){
     @Table(name="ApiKey")
 
     @Id
