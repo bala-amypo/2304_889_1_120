@@ -3,7 +3,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.example.demo.entity.KeyExemption;
 
-@Repository
 public interface KeyExemptionRepository extends JpaRepository<KeyExemption,Long>{
 
 }

@@ -1,6 +1,6 @@
 package com.example.demo.service.impl;
 
-import com.example.demo.enity.ApiKey;
+import com.example.demo.entity.ApiKey;
 import com.example.demo.repository.ApiKeyRepository;
 import com.example.demo.service.ApiKeyService;
 import org.springframework.stereotype.Service;
@@ -28,7 +28,7 @@ public class ApiKeyServiceImpl implements ApiKeyService {
     @Override
     public ApiKey updateApiKey(Long id, ApiKey apiKey) {
         ApiKey existing = apiKeyRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("API Key not found"));
+                .orElseThrow(() -> new RuntimeException("ApiKey not found"));
 
         existing.setKeyValue(apiKey.getKeyValue());
         existing.setOwnerId(apiKey.getOwnerId());
@@ -40,7 +40,7 @@ public class ApiKeyServiceImpl implements ApiKeyService {
     @Override
     public ApiKey getApiKeyById(Long id) {
         return apiKeyRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("API Key not found"));
+                .orElseThrow(() -> new RuntimeException("ApiKey not found"));
     }
 
     @Override
@@ -51,7 +51,7 @@ public class ApiKeyServiceImpl implements ApiKeyService {
     @Override
     public void deactivateApiKey(Long id) {
         ApiKey apiKey = apiKeyRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("API Key not found"));
+                .orElseThrow(() -> new RuntimeException("ApiKey not found"));
 
         apiKey.setActive(false);
         apiKey.setUpdatedAt(new Timestamp(System.currentTimeMillis()));
