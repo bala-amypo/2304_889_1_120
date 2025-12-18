@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name="ApiKey")
-public class ApiKeyEntity {
+public class ApiKey {
     @Table(name="ApiKey")
 
     @Id
@@ -23,7 +23,7 @@ public class ApiKeyEntity {
     private Timestamp createdAt;    
     private Timestamp updatedAt;    
 
-    public ApiKeyEntity(Long id, String keyValue, Long ownerId, QuotaPlan plan, Boolean active, Timestamp createdAt, Timestamp updatedAt) {
+    public ApiKey(Long id, String keyValue, Long ownerId, QuotaPlan plan, Boolean active, Timestamp createdAt, Timestamp updatedAt) {
         this.id = id;
         this.keyValue = keyValue;
         this.ownerId = ownerId;
@@ -33,7 +33,7 @@ public class ApiKeyEntity {
         this.updatedAt = updatedAt;
     }
 
-    public ApiKeyEntity() {
+    public ApiKey() {
         this.active = true;
     }
 
