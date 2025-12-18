@@ -2,6 +2,7 @@ package com.example.demo.entity;
 
 import java.sql.Timestamp;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.*;
 
 @Entity
 public class ApiUsageLog {

@@ -2,6 +2,7 @@ package com.example.demo.enity;
 import java.util.*;
 import java.sql.Timestamp;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.*;
 
 @Entity
 @Table(name="ApiKey")
