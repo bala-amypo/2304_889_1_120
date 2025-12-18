@@ -10,47 +10,41 @@ import java.util.List;
 @Service
 public class QuotaPlanServiceImpl implements QuotaPlanService {
 
-    private final QuotaPlanRepository quotaPlanRepository;
+    private final QuotaPlanRepository repository;
 
-    public QuotaPlanServiceImpl(QuotaPlanRepository quotaPlanRepository) {
-        this.quotaPlanRepository = quotaPlanRepository;
+    public QuotaPlanServiceImpl(QuotaPlanRepository repository) {
+        this.repository = repository;
     }
 
     @Override
-    public QuotaPlan createPlan(QuotaPlan plan) {
-        plan.setActive(true);
-        return quotaPlanRepository.save(plan);
+    public QuotaPlan create(QuotaPlan plan) {
+        return repository.save(plan);
     }
 
     @Override
-    public QuotaPlan updatePlan(Long id, QuotaPlan plan) {
-        QuotaPlan existing = quotaPlanRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("QuotaPlan not found"));
-
+    public QuotaPlan update(Long id, QuotaPlan plan) {
+        QuotaPlan existing = getById(id);
         existing.setPlanName(plan.getPlanName());
         existing.setDailyLimit(plan.getDailyLimit());
         existing.setDescription(plan.getDescription());
-
-        return quotaPlanRepository.save(existing);
+        return repository.save(existing);
     }
 
     @Override
-    public QuotaPlan getPlanById(Long id) {
-        return quotaPlanRepository.findById(id)
+    public QuotaPlan getById(Long id) {
+        return repository.findById(id)
                 .orElseThrow(() -> new RuntimeException("QuotaPlan not found"));
     }
 
     @Override
-    public List<QuotaPlan> getAllPlans() {
-        return quotaPlanRepository.findAll();
+    public List<QuotaPlan> getAll() {
+        return repository.findAll();
     }
 
     @Override
-    public void deactivatePlan(Long id) {
-        QuotaPlan plan = quotaPlanRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("QuotaPlan not found"));
-
+    public void deactivate(Long id) {
+        QuotaPlan plan = getById(id);
         plan.setActive(false);
-        quotaPlanRepository.save(plan);
+        repository.save(plan);
     }
 }

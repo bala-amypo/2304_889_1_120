@@ -11,28 +11,54 @@ public class QuotaPlan {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String name;
+    @Column(name = "plan_name", nullable = false)
+    private String planName;
 
     @Min(1)
-    private int requestLimit;
+    @Column(name = "daily_limit")
+    private int dailyLimit;
+
+    @Column(length = 500)
+    private String description;
+
+    @Column(nullable = false)
+    private boolean active = true;
+
+    // ===== GETTERS & SETTERS =====
 
     public Long getId() {
         return id;
     }
 
-    public String getName() {
-        return name;
+    public String getPlanName() {
+        return planName;
     }
 
-    public int getRequestLimit() {
-        return requestLimit;
+    public void setPlanName(String planName) {
+        this.planName = planName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public int getDailyLimit() {
+        return dailyLimit;
     }
 
-    public void setRequestLimit(int requestLimit) {
-        this.requestLimit = requestLimit;
+    public void setDailyLimit(int dailyLimit) {
+        this.dailyLimit = dailyLimit;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
     }
 }

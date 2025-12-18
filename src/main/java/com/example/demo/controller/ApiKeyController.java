@@ -2,14 +2,12 @@ package com.example.demo.controller;
 
 import com.example.demo.entity.ApiKey;
 import com.example.demo.service.ApiKeyService;
-import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/api-keys")
-@Tag(name = "API Keys")
+@RequestMapping("/api/keys")
 public class ApiKeyController {
 
     private final ApiKeyService apiKeyService;
@@ -19,28 +17,27 @@ public class ApiKeyController {
     }
 
     @PostMapping
-    public ApiKey createApiKey(@RequestBody ApiKey apiKey) {
-        return apiKeyService.createApiKey(apiKey);
+    public ApiKey create(@RequestBody ApiKey apiKey) {
+        return apiKeyService.create(apiKey);
     }
 
     @PutMapping("/{id}")
-    public ApiKey updateApiKey(@PathVariable Long id,
-                               @RequestBody ApiKey apiKey) {
-        return apiKeyService.updateApiKey(id, apiKey);
+    public ApiKey update(@PathVariable Long id, @RequestBody ApiKey apiKey) {
+        return apiKeyService.update(id, apiKey);
     }
 
     @GetMapping("/{id}")
-    public ApiKey getApiKeyById(@PathVariable Long id) {
-        return apiKeyService.getApiKeyById(id);
+    public ApiKey getById(@PathVariable Long id) {
+        return apiKeyService.getById(id);
     }
 
     @GetMapping
-    public List<ApiKey> getAllApiKeys() {
-        return apiKeyService.getAllApiKeys();
+    public List<ApiKey> getAll() {
+        return apiKeyService.getAll();
     }
 
-    @PutMapping("/{id}/deactivate")
-    public void deactivateApiKey(@PathVariable Long id) {
-        apiKeyService.deactivateApiKey(id);
+    @DeleteMapping("/{id}")
+    public void deactivate(@PathVariable Long id) {
+        apiKeyService.deactivate(id);
     }
 }

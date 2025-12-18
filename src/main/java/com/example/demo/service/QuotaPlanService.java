@@ -1,17 +1,18 @@
 package com.example.demo.service;
 
 import com.example.demo.entity.QuotaPlan;
+
 import java.util.List;
 
 public interface QuotaPlanService {
 
-    QuotaPlan createPlan(QuotaPlan plan);
+    QuotaPlan create(QuotaPlan plan);
 
-    QuotaPlan updatePlan(Long id, QuotaPlan plan);
+    QuotaPlan update(Long id, QuotaPlan plan);
 
-    QuotaPlan getPlanById(Long id);
+    QuotaPlan getById(Long id);
 
-    List<QuotaPlan> getAllPlans();
+    List<QuotaPlan> getAll();
 
-    void deactivatePlan(Long id);
+    void deactivate(Long id);
 }
