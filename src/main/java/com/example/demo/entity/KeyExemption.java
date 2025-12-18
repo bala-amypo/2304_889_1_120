@@ -10,7 +10,7 @@ public class KeyExemption(){
    private Integer temporaryExtensionLimit;
    private Timestamp validUntil;
    
-    public RateLimitEnforcement() {
+   public () {
     }
 
    public RateLimitEnforcement(Long id, String notes, Boolean unlimitedAccess, Integer temporaryExtensionLimit,
