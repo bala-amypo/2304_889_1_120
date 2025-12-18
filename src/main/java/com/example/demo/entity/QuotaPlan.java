@@ -26,7 +26,6 @@ public class QuotaPlan {
         this.active = active;
     }
 
-    // Getters and Setters
     public Long getId() {
         return id;
     }
