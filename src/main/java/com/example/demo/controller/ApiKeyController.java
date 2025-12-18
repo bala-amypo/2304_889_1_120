@@ -23,26 +23,22 @@ public class ApiKeyController {
         return apiKeyService.createApiKey(apiKey);
     }
 
-    // PUT /api/api-keys/{id}
     @PutMapping("/{id}")
     public ApiKey updateApiKey(@PathVariable Long id,
                                @RequestBody ApiKey apiKey) {
         return apiKeyService.updateApiKey(id, apiKey);
     }
 
-    // GET /api/api-keys/{id}
     @GetMapping("/{id}")
     public ApiKey getApiKeyById(@PathVariable Long id) {
         return apiKeyService.getApiKeyById(id);
     }
 
-    // GET /api/api-keys
     @GetMapping
     public List<ApiKey> getAllApiKeys() {
         return apiKeyService.getAllApiKeys();
     }
 
-    // PUT /api/api-keys/{id}/deactivate
     @PutMapping("/{id}/deactivate")
     public void deactivateApiKey(@PathVariable Long id) {
         apiKeyService.deactivateApiKey(id);
