@@ -5,7 +5,6 @@ import jakarta.persistence.*;
 
 @Entity
 public class ApiUsageLog {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -13,15 +12,15 @@ public class ApiUsageLog {
     private String endpoint;
     private Timestamp timestamp;
 
-    
-    
     public ApiUsageLog() {
     }
+
     public ApiUsageLog(Long id, String endpoint, Timestamp timestamp) {
         this.id = id;
         this.endpoint = endpoint;
         this.timestamp = timestamp;
     }
+
     public Long getId() {
         return id;
     }
