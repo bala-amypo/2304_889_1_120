@@ -1,44 +1,57 @@
 package com.example.demo.entity;
 
-import java.sql.Timestamp;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.*;
+import java.time.LocalDateTime;
 
 @Entity
+@Table(name = "api_usage_logs")
 public class ApiUsageLog {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false)
+    private String keyId;
+
     private String endpoint;
-    private Timestamp timestamp;
 
-    public ApiUsageLog() {
-    }
+    @Column(nullable = false)
+    private LocalDateTime timestamp;
 
-    public ApiUsageLog(Long id, String endpoint, Timestamp timestamp) {
-        this.id = id;
-        this.endpoint = endpoint;
-        this.timestamp = timestamp;
-    }
+    // Constructors
+    public ApiUsageLog() {}
 
+    // Getters and Setters
     public Long getId() {
         return id;
     }
+
     public void setId(Long id) {
         this.id = id;
     }
+
+    public String getKeyId() {
+        return keyId;
+    }
+
+    public void setKeyId(String keyId) {
+        this.keyId = keyId;
+    }
+
     public String getEndpoint() {
         return endpoint;
     }
+
     public void setEndpoint(String endpoint) {
         this.endpoint = endpoint;
     }
-    public Timestamp getTimestamp() {
+
+    public LocalDateTime getTimestamp() {
         return timestamp;
     }
-    public void setTimestamp(Timestamp timestamp) {
+
+    public void setTimestamp(LocalDateTime timestamp) {
         this.timestamp = timestamp;
     }
-    
 }
