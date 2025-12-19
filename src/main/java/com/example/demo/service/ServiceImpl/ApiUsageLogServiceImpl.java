@@ -5,9 +5,8 @@ import com.example.demo.repository.ApiUsageLogRepository;
 import com.example.demo.service.ApiUsageLogService;
 import org.springframework.stereotype.Service;
 
-import java.sql.Timestamp;
 import java.time.LocalDate;
-import java.time.ZoneId;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -21,31 +20,24 @@ public class ApiUsageLogServiceImpl implements ApiUsageLogService {
 
     @Override
     public ApiUsageLog logUsage(ApiUsageLog usageLog) {
-        usageLog.setTimestamp(new Timestamp(System.currentTimeMillis()));
+        usageLog.setTimestamp(LocalDateTime.now());
         return apiUsageLogRepository.save(usageLog);
     }
 
     @Override
-    public List<ApiUsageLog> getTodayUsage() {
-        Timestamp startOfDay = Timestamp.valueOf(
-                LocalDate.now().atStartOfDay()
-        );
-        Timestamp endOfDay = Timestamp.valueOf(
-                LocalDate.now().plusDays(1).atStartOfDay()
-        );
-
-        return apiUsageLogRepository.findByTimestampBetween(startOfDay, endOfDay);
+    public List<ApiUsageLog> getUsageByKey(String keyId) {
+        return apiUsageLogRepository.findByKeyId(keyId);
     }
 
     @Override
-    public long getTodayRequestCount() {
-        Timestamp startOfDay = Timestamp.valueOf(
-                LocalDate.now().atStartOfDay()
-        );
-        Timestamp endOfDay = Timestamp.valueOf(
-                LocalDate.now().plusDays(1).atStartOfDay()
-        );
+    public List<ApiUsageLog> getTodayUsageByKey(String keyId) {
+        LocalDate today = LocalDate.now();
+        return apiUsageLogRepository.findByKeyIdAndDate(keyId, today);
+    }
 
-        return apiUsageLogRepository.countByTimestampBetween(startOfDay, endOfDay);
+    @Override
+    public long getTodayRequestCountByKey(String keyId) {
+        LocalDate today = LocalDate.now();
+        return apiUsageLogRepository.countByKeyIdAndDate(keyId, today);
     }
 }
