@@ -1,44 +1,48 @@
-package com.example.demo.service.impl;
+package com.example.demo.service.ServiceImpl;
 
 import com.example.demo.entity.ApiUsageLog;
 import com.example.demo.repository.ApiUsageLogRepository;
 import com.example.demo.service.ApiUsageLogService;
 import org.springframework.stereotype.Service;
 
-import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Service
 public class ApiUsageLogServiceImpl implements ApiUsageLogService {
 
-    private final ApiUsageLogRepository apiUsageLogRepository;
+    private final ApiUsageLogRepository repository;
 
-    public ApiUsageLogServiceImpl(ApiUsageLogRepository apiUsageLogRepository) {
-        this.apiUsageLogRepository = apiUsageLogRepository;
+    public ApiUsageLogServiceImpl(ApiUsageLogRepository repository) {
+        this.repository = repository;
     }
 
     @Override
     public ApiUsageLog logUsage(ApiUsageLog usageLog) {
         usageLog.setTimestamp(LocalDateTime.now());
-        return apiUsageLogRepository.save(usageLog);
+        return repository.save(usageLog);
     }
 
     @Override
     public List<ApiUsageLog> getUsageByKey(String keyId) {
-        return apiUsageLogRepository.findByKeyId(keyId);
+        return repository.findByKeyId(keyId);
     }
 
     @Override
     public List<ApiUsageLog> getTodayUsageByKey(String keyId) {
         LocalDate today = LocalDate.now();
-        return apiUsageLogRepository.findByKeyIdAndDate(keyId, today);
+        LocalDateTime start = today.atStartOfDay();
+        LocalDateTime end = today.plusDays(1).atStartOfDay();
+
+        return repository.findTodayUsage(keyId, start, end);
     }
 
     @Override
     public long getTodayRequestCountByKey(String keyId) {
         LocalDate today = LocalDate.now();
-        return apiUsageLogRepository.countByKeyIdAndDate(keyId, today);
+        LocalDateTime start = today.atStartOfDay();
+        LocalDateTime end = today.plusDays(1).atStartOfDay();
+
+        return repository.countTodayUsage(keyId, start, end);
     }
 }

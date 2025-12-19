@@ -12,33 +12,33 @@ import java.util.List;
 @Tag(name = "API Usage Logs")
 public class ApiUsageLogController {
 
-    private final ApiUsageLogService apiUsageLogService;
+    private final ApiUsageLogService service;
 
-    public ApiUsageLogController(ApiUsageLogService apiUsageLogService) {
-        this.apiUsageLogService = apiUsageLogService;
+    public ApiUsageLogController(ApiUsageLogService service) {
+        this.service = service;
     }
 
-    // POST /api/usage-logs → Log usage
+    // POST /api/usage-logs
     @PostMapping
     public ApiUsageLog logUsage(@RequestBody ApiUsageLog usageLog) {
-        return apiUsageLogService.logUsage(usageLog);
+        return service.logUsage(usageLog);
     }
 
-    // GET /api/usage-logs/key/{keyId} → Get usage for API key
+    // GET /api/usage-logs/key/{keyId}
     @GetMapping("/key/{keyId}")
     public List<ApiUsageLog> getUsageByKey(@PathVariable String keyId) {
-        return apiUsageLogService.getUsageByKey(keyId);
+        return service.getUsageByKey(keyId);
     }
 
-    // GET /api/usage-logs/key/{keyId}/today → Get today's usage
+    // GET /api/usage-logs/key/{keyId}/today
     @GetMapping("/key/{keyId}/today")
-    public List<ApiUsageLog> getTodayUsageByKey(@PathVariable String keyId) {
-        return apiUsageLogService.getTodayUsageByKey(keyId);
+    public List<ApiUsageLog> getTodayUsage(@PathVariable String keyId) {
+        return service.getTodayUsageByKey(keyId);
     }
 
-    // GET /api/usage-logs/key/{keyId}/count-today → Total requests today
+    // GET /api/usage-logs/key/{keyId}/count-today
     @GetMapping("/key/{keyId}/count-today")
-    public long getTodayRequestCountByKey(@PathVariable String keyId) {
-        return apiUsageLogService.getTodayRequestCountByKey(keyId);
+    public long getTodayCount(@PathVariable String keyId) {
+        return service.getTodayRequestCountByKey(keyId);
     }
 }
