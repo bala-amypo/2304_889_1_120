@@ -26,19 +26,19 @@ public class ApiUsageLogController {
 
     // GET /api/usage-logs/key/{keyId}
     @GetMapping("/key/{keyId}")
-    public List<ApiUsageLog> getUsageByKey(@PathVariable String keyId) {
-        return service.getUsageByKey(keyId);
+    public List<ApiUsageLog> getUsage(@PathVariable Long keyId) {
+        return service.getUsageByApiKey(keyId);
     }
 
     // GET /api/usage-logs/key/{keyId}/today
     @GetMapping("/key/{keyId}/today")
-    public List<ApiUsageLog> getTodayUsage(@PathVariable String keyId) {
-        return service.getTodayUsageByKey(keyId);
+    public List<ApiUsageLog> getTodayUsage(@PathVariable Long keyId) {
+        return service.getTodayUsageByApiKey(keyId);
     }
 
     // GET /api/usage-logs/key/{keyId}/count-today
     @GetMapping("/key/{keyId}/count-today")
-    public long getTodayCount(@PathVariable String keyId) {
-        return service.getTodayRequestCountByKey(keyId);
+    public long getTodayCount(@PathVariable Long keyId) {
+        return service.getTodayRequestCountByApiKey(keyId);
     }
 }

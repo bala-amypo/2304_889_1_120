@@ -5,8 +5,10 @@ import com.example.demo.repository.ApiUsageLogRepository;
 import com.example.demo.service.ApiUsageLogService;
 import org.springframework.stereotype.Service;
 
+import java.sql.Timestamp;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.util.List;
 
 @Service
 public class ApiUsageLogServiceImpl implements ApiUsageLogService {
@@ -19,30 +21,36 @@ public class ApiUsageLogServiceImpl implements ApiUsageLogService {
 
     @Override
     public ApiUsageLog logUsage(ApiUsageLog usageLog) {
-        usageLog.setTimestamp(LocalDateTime.now());
+        usageLog.setTimestamp(new Timestamp(System.currentTimeMillis()));
         return repository.save(usageLog);
     }
 
     @Override
-    public List<ApiUsageLog> getUsageByKey(String keyId) {
-        return repository.findByKeyId(keyId);
+    public List<ApiUsageLog> getUsageByApiKey(Long apiKeyId) {
+        return repository.findByApiKey_Id(apiKeyId);
     }
 
     @Override
-    public List<ApiUsageLog> getTodayUsageByKey(String keyId) {
-        LocalDate today = LocalDate.now();
-        LocalDateTime start = today.atStartOfDay();
-        LocalDateTime end = today.plusDays(1).atStartOfDay();
+    public List<ApiUsageLog> getTodayUsageByApiKey(Long apiKeyId) {
+        Timestamp start = Timestamp.valueOf(
+                LocalDate.now().atStartOfDay()
+        );
+        Timestamp end = Timestamp.valueOf(
+                LocalDate.now().plusDays(1).atStartOfDay()
+        );
 
-        return repository.findTodayUsage(keyId, start, end);
+        return repository.findTodayUsage(apiKeyId, start, end);
     }
 
     @Override
-    public long getTodayRequestCountByKey(String keyId) {
-        LocalDate today = LocalDate.now();
-        LocalDateTime start = today.atStartOfDay();
-        LocalDateTime end = today.plusDays(1).atStartOfDay();
+    public long getTodayRequestCountByApiKey(Long apiKeyId) {
+        Timestamp start = Timestamp.valueOf(
+                LocalDate.now().atStartOfDay()
+        );
+        Timestamp end = Timestamp.valueOf(
+                LocalDate.now().plusDays(1).atStartOfDay()
+        );
 
-        return repository.countTodayUsage(keyId, start, end);
+        return repository.countTodayUsage(apiKeyId, start, end);
     }
 }

@@ -8,9 +8,9 @@ public interface ApiUsageLogService {
 
     ApiUsageLog logUsage(ApiUsageLog usageLog);
 
-    List<ApiUsageLog> getUsageByKey(String keyId);
+    List<ApiUsageLog> getUsageByApiKey(Long apiKeyId);
 
-    List<ApiUsageLog> getTodayUsageByKey(String keyId);
+    List<ApiUsageLog> getTodayUsageByApiKey(Long apiKeyId);
 
-    long getTodayRequestCountByKey(String keyId);
+    long getTodayRequestCountByApiKey(Long apiKeyId);
 }
