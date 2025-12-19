@@ -1,7 +1,7 @@
 package com.example.demo.entity;
 
 import jakarta.persistence.*;
-import java.time.LocalDateTime;
+import java.sql.Timestamp;
 
 @Entity
 @Table(name = "api_usage_logs")
@@ -11,32 +11,28 @@ public class ApiUsageLog {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
-    private String keyId;
+    // Many logs → One API key
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "api_key_id", nullable = false)
+    private ApiKey apiKey;
 
+    @Column(nullable = false)
     private String endpoint;
 
     @Column(nullable = false)
-    private LocalDateTime timestamp;
+    private Timestamp timestamp;
 
-    // Constructors
-    public ApiUsageLog() {}
-
-    // Getters and Setters
+    // getters & setters
     public Long getId() {
         return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public ApiKey getApiKey() {
+        return apiKey;
     }
 
-    public String getKeyId() {
-        return keyId;
-    }
-
-    public void setKeyId(String keyId) {
-        this.keyId = keyId;
+    public void setApiKey(ApiKey apiKey) {
+        this.apiKey = apiKey;
     }
 
     public String getEndpoint() {
@@ -47,11 +43,11 @@ public class ApiUsageLog {
         this.endpoint = endpoint;
     }
 
-    public LocalDateTime getTimestamp() {
+    public Timestamp getTimestamp() {
         return timestamp;
     }
 
-    public void setTimestamp(LocalDateTime timestamp) {
+    public void setTimestamp(Timestamp timestamp) {
         this.timestamp = timestamp;
     }
 }
