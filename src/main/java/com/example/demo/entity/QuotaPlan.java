@@ -24,8 +24,6 @@ public class QuotaPlan {
     @Column(nullable = false)
     private boolean active = true;
 
-    // ===== GETTERS & SETTERS =====
-
     public Long getId() {
         return id;
     }
