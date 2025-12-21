@@ -9,7 +9,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/api-keys")
-@Tag=
+@Tag(name="Api Key")
 public class ApiKeyController {
 
     private final ApiKeyService apiKeyService;
