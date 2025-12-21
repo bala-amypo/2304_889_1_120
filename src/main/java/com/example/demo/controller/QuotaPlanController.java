@@ -3,11 +3,13 @@ package com.example.demo.controller;
 import com.example.demo.entity.QuotaPlan;
 import com.example.demo.service.QuotaPlanService;
 import org.springframework.web.bind.annotation.*;
+import io.swagger.v3.oas.annotations.tags.Tag;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/api/quota-plans")
+@Tag(name="Quota Plan")
 public class QuotaPlanController {
 
     private final QuotaPlanService quotaPlanService;

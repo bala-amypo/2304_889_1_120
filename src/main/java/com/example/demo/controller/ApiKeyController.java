@@ -3,11 +3,13 @@ package com.example.demo.controller;
 import com.example.demo.entity.ApiKey;
 import com.example.demo.service.ApiKeyService;
 import org.springframework.web.bind.annotation.*;
+import io.swagger.v3.oas.annotations.tags.Tag;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/api/api-keys")
+@Tag=
 public class ApiKeyController {
 
     private final ApiKeyService apiKeyService;
