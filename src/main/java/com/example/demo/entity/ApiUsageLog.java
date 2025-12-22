@@ -11,7 +11,6 @@ public class ApiUsageLog {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    // Many logs → One API key
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "api_key_id", nullable = false)
     private ApiKey apiKey;
@@ -22,7 +21,6 @@ public class ApiUsageLog {
     @Column(nullable = false)
     private Timestamp timestamp;
 
-    // getters & setters
     public Long getId() {
         return id;
     }
