@@ -9,10 +9,8 @@ import java.util.List;
 
 public interface ApiUsageLogRepository extends JpaRepository<ApiUsageLog, Long> {
 
-    // All usage by API key ID
     List<ApiUsageLog> findByApiKey_Id(Long apiKeyId);
 
-    // Today's usage
     @Query("""
         SELECT a FROM ApiUsageLog a
         WHERE a.apiKey.id = :apiKeyId
@@ -25,7 +23,6 @@ public interface ApiUsageLogRepository extends JpaRepository<ApiUsageLog, Long> 
             Timestamp end
     );
 
-    // Count today's usage
     @Query("""
         SELECT COUNT(a) FROM ApiUsageLog a
         WHERE a.apiKey.id = :apiKeyId
