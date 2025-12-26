@@ -1,26 +1,28 @@
 package com.example.demo.security;
 
 import io.jsonwebtoken.Claims;
-import java.util.Map;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
+
+import java.util.Date;
 
 public class JwtUtil {
-    public String generateToken(Map<String, Object> claims, String username) {
-        return "JWT_TOKEN";
+
+    private static final String SECRET_KEY = "my-secret-key";
+
+    public static String generateToken(String username) {
+        return Jwts.builder()
+                .setSubject(username)
+                .setIssuedAt(new Date())
+                .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60))
+                .signWith(SignatureAlgorithm.HS256, SECRET_KEY)
+                .compact();
     }
-    
-    public String getUsername(String token) {
-        return getClaims(token).getSubject();
-    }
-    
-    public Claims getClaims(String token) {
-        return null;
-    }
-    
-    public boolean isTokenValid(String token, String username) {
-        return getUsername(token).equals(username);
-    }
-    
-    public long getExpirationMillis() {
-        return 3600000L;
+
+    public static Claims extractClaims(String token) {
+        return Jwts.parser()
+                .setSigningKey(SECRET_KEY)
+                .parseClaimsJws(token)
+                .getBody();
     }
 }
