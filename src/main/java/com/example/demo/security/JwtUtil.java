@@ -24,7 +24,6 @@ public class JwtUtil {
                 .compact();
     }
 
-    // 🔥 REQUIRED BY TESTS
     public Claims getClaims(String token) {
         return Jwts.parser()
                 .setSigningKey(SECRET)
@@ -32,17 +31,20 @@ public class JwtUtil {
                 .getBody();
     }
 
-    // 🔥 REQUIRED BY TESTS
     public String getUsername(String token) {
         return getClaims(token).getSubject();
     }
 
-    public boolean isTokenValid(String token, String username) {
-        return username.equals(getUsername(token)) &&
-               !getClaims(token).getExpiration().before(new Date());
+    // ✅ REQUIRED BY JwtAuthenticationFilter
+    public String extractUsername(String token) {
+        return getUsername(token);
     }
 
-    // 🔥 REQUIRED BY TEST
+    public boolean isTokenValid(String token, String username) {
+        return username.equals(getUsername(token)) &&
+                !getClaims(token).getExpiration().before(new Date());
+    }
+
     public long getExpirationMillis() {
         return EXPIRATION;
     }
