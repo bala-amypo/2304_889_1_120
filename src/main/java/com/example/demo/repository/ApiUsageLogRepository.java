@@ -3,35 +3,26 @@ package com.example.demo.repository;
 import com.example.demo.entity.ApiUsageLog;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
-import java.sql.Timestamp;
+import java.time.Instant;
 import java.util.List;
 
 public interface ApiUsageLogRepository extends JpaRepository<ApiUsageLog, Long> {
 
-    List<ApiUsageLog> findByApiKey_Id(Long apiKeyId);
+    List<ApiUsageLog> findByApiKey_Id(Long id);
 
-    @Query("""
-        SELECT a FROM ApiUsageLog a
-        WHERE a.apiKey.id = :apiKeyId
-        AND a.timestamp >= :start
-        AND a.timestamp < :end
-    """)
-    List<ApiUsageLog> findTodayUsage(
-            Long apiKeyId,
-            Timestamp start,
-            Timestamp end
+    @Query("SELECT u FROM ApiUsageLog u WHERE u.apiKey.id = :keyId AND u.timestamp BETWEEN :start AND :end")
+    List<ApiUsageLog> findForKeyBetween(
+            @Param("keyId") Long keyId,
+            @Param("start") Instant start,
+            @Param("end") Instant end
     );
 
-    @Query("""
-        SELECT COUNT(a) FROM ApiUsageLog a
-        WHERE a.apiKey.id = :apiKeyId
-        AND a.timestamp >= :start
-        AND a.timestamp < :end
-    """)
-    long countTodayUsage(
-            Long apiKeyId,
-            Timestamp start,
-            Timestamp end
+    @Query("SELECT COUNT(u) FROM ApiUsageLog u WHERE u.apiKey.id = :keyId AND u.timestamp BETWEEN :start AND :end")
+    int countForKeyBetween(
+            @Param("keyId") Long keyId,
+            @Param("start") Instant start,
+            @Param("end") Instant end
     );
 }
