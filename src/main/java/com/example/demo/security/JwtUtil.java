@@ -12,7 +12,7 @@ import java.util.Map;
 public class JwtUtil {
 
     private static final String SECRET = "my-secret-key-123456";
-    private static final long EXPIRATION = 1000 * 60 * 60; // 1 hour
+    private static final long EXPIRATION = 1000 * 60 * 60; 
 
     public String generateToken(Map<String, Object> claims, String username) {
         return Jwts.builder()
@@ -35,7 +35,6 @@ public class JwtUtil {
         return getClaims(token).getSubject();
     }
 
-    // ✅ REQUIRED BY JwtAuthenticationFilter
     public String extractUsername(String token) {
         return getUsername(token);
     }

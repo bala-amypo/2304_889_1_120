@@ -22,7 +22,7 @@ public class RateLimitEnforcement {
         return id;
     }
 
-    public void setId(Long id) {      // ✅ added (safe)
+    public void setId(Long id) {      
         this.id = id;
     }
 

@@ -23,7 +23,7 @@ public class KeyExemption {
         return id;
     }
 
-    public void setId(Long id) {      // ✅ added (safe)
+    public void setId(Long id) {      
         this.id = id;
     }
 

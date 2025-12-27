@@ -23,7 +23,7 @@ public class ApiKey {
         return id;
     }
 
-    public void setId(Long id) {      // ✅ REQUIRED BY TESTS
+    public void setId(Long id) {      
         this.id = id;
     }
 

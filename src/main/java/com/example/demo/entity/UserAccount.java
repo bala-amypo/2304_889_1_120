@@ -22,7 +22,7 @@ public class UserAccount {
         return id;
     }
 
-    public void setId(Long id) {     // ✅ added (safe even if not tested)
+    public void setId(Long id) {     
         this.id = id;
     }
 
