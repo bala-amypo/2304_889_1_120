@@ -1,6 +1,5 @@
 package com.example.demo.entity;
 
-import java.sql.Timestamp;
 import jakarta.persistence.*;
 
 @Entity
@@ -11,48 +10,43 @@ public class RateLimitEnforcement {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Timestamp blockedAt;
-
-    private int limitExceededBy;
-
+    private Integer limitExceededBy;
     private String message;
 
-    public RateLimitEnforcement() {
-    }
+    @ManyToOne
+    private ApiKey apiKey;
 
-    public RateLimitEnforcement(Long id, Timestamp blockedAt,
-                                int limitExceededBy, String message) {
-        this.id = id;
-        this.blockedAt = blockedAt;
-        this.limitExceededBy = limitExceededBy;
-        this.message = message;
-    }
+    public RateLimitEnforcement() {}
 
     public Long getId() {
         return id;
     }
-    public void setId(Long id) {
+
+    public void setId(Long id) {      // ✅ added (safe)
         this.id = id;
     }
 
-    public Timestamp getBlockedAt() {
-        return blockedAt;
-    }
-    public void setBlockedAt(Timestamp blockedAt) {
-        this.blockedAt = blockedAt;
-    }
-
-    public int getLimitExceededBy() {
+    public Integer getLimitExceededBy() {
         return limitExceededBy;
     }
-    public void setLimitExceededBy(int limitExceededBy) {
+
+    public void setLimitExceededBy(Integer limitExceededBy) {
         this.limitExceededBy = limitExceededBy;
     }
 
     public String getMessage() {
         return message;
     }
+
     public void setMessage(String message) {
         this.message = message;
+    }
+
+    public ApiKey getApiKey() {
+        return apiKey;
+    }
+
+    public void setApiKey(ApiKey apiKey) {
+        this.apiKey = apiKey;
     }
 }

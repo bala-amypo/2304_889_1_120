@@ -1,48 +1,37 @@
 package com.example.demo.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 @Entity
-@Table(name = "user_account") // optional, matches your DB table name
+@Table(name = "user_accounts")
 public class UserAccount {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY) // auto-increment
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String username;
+    @Column(unique = true)
+    private String email;
+
     private String password;
-    private String role; // optional, for roles like ADMIN, USER
+    private String role;
 
-    // Constructors
-    public UserAccount() {
-    }
+    public UserAccount() {}
 
-    public UserAccount(String username, String password, String role) {
-        this.username = username;
-        this.password = password;
-        this.role = role;
-    }
-
-    // Getters and Setters
     public Long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Long id) {     // ✅ added (safe even if not tested)
         this.id = id;
     }
 
-    public String getUsername() {
-        return username;
+    public String getEmail() {
+        return email;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getPassword() {

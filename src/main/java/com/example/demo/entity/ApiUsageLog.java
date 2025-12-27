@@ -1,7 +1,7 @@
 package com.example.demo.entity;
 
 import jakarta.persistence.*;
-import java.sql.Timestamp;
+import java.time.Instant;
 
 @Entity
 @Table(name = "api_usage_logs")
@@ -11,26 +11,20 @@ public class ApiUsageLog {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "api_key_id", nullable = false)
+    private String endpoint;
+    private Instant timestamp;
+
+    @ManyToOne
     private ApiKey apiKey;
 
-    @Column(nullable = false)
-    private String endpoint;
-
-    @Column(nullable = false)
-    private Timestamp timestamp;
+    public ApiUsageLog() {}
 
     public Long getId() {
         return id;
     }
 
-    public ApiKey getApiKey() {
-        return apiKey;
-    }
-
-    public void setApiKey(ApiKey apiKey) {
-        this.apiKey = apiKey;
+    public void setId(Long id) {      // ✅ added (safe)
+        this.id = id;
     }
 
     public String getEndpoint() {
@@ -41,11 +35,19 @@ public class ApiUsageLog {
         this.endpoint = endpoint;
     }
 
-    public Timestamp getTimestamp() {
+    public Instant getTimestamp() {
         return timestamp;
     }
 
-    public void setTimestamp(Timestamp timestamp) {
+    public void setTimestamp(Instant timestamp) {
         this.timestamp = timestamp;
+    }
+
+    public ApiKey getApiKey() {
+        return apiKey;
+    }
+
+    public void setApiKey(ApiKey apiKey) {
+        this.apiKey = apiKey;
     }
 }

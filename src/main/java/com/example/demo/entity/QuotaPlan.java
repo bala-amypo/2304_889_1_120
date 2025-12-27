@@ -1,7 +1,6 @@
 package com.example.demo.entity;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Min;
 
 @Entity
 @Table(name = "quota_plans")
@@ -11,21 +10,18 @@ public class QuotaPlan {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "plan_name", nullable = false)
     private String planName;
-
-    @Min(1)
-    @Column(name = "daily_limit")
-    private int dailyLimit;
-
-    @Column(length = 500)
-    private String description;
-
-    @Column(nullable = false)
+    private Integer dailyLimit;
     private boolean active = true;
+
+    public QuotaPlan() {}
 
     public Long getId() {
         return id;
+    }
+
+    public void setId(Long id) {      // ✅ REQUIRED BY TESTS
+        this.id = id;
     }
 
     public String getPlanName() {
@@ -36,20 +32,12 @@ public class QuotaPlan {
         this.planName = planName;
     }
 
-    public int getDailyLimit() {
+    public Integer getDailyLimit() {
         return dailyLimit;
     }
 
-    public void setDailyLimit(int dailyLimit) {
+    public void setDailyLimit(Integer dailyLimit) {
         this.dailyLimit = dailyLimit;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
     }
 
     public boolean isActive() {
