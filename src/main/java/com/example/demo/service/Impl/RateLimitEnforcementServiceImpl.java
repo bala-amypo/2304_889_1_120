@@ -1,42 +1,46 @@
 package com.example.demo.service.impl;
 
 import com.example.demo.entity.RateLimitEnforcement;
+import com.example.demo.exception.BadRequestException;
+import com.example.demo.exception.ResourceNotFoundException;
+import com.example.demo.repository.ApiKeyRepository;
 import com.example.demo.repository.RateLimitEnforcementRepository;
 import com.example.demo.service.RateLimitEnforcementService;
 import org.springframework.stereotype.Service;
 
-import java.sql.Timestamp;
 import java.util.List;
-
 @Service
-public class RateLimitEnforcementServiceImpl
-        implements RateLimitEnforcementService {
+public class RateLimitEnforcementServiceImpl implements RateLimitEnforcementService {
 
-    private final RateLimitEnforcementRepository repository;
+    private final RateLimitEnforcementRepository repo;
+    private final ApiKeyRepository keyRepo;
 
-    public RateLimitEnforcementServiceImpl(
-            RateLimitEnforcementRepository repository) {
-        this.repository = repository;
+    public RateLimitEnforcementServiceImpl(RateLimitEnforcementRepository repo,
+                                          ApiKeyRepository keyRepo) {
+        this.repo = repo;
+        this.keyRepo = keyRepo;
     }
 
     @Override
-    public RateLimitEnforcement createEnforcement(
-            RateLimitEnforcement enforcement) {
+    public RateLimitEnforcement createEnforcement(RateLimitEnforcement e) {
+        if (e.getLimitExceededBy() <= 0) {
+            throw new BadRequestException("Invalid limit");
+        }
 
-        enforcement.setBlockedAt(
-                new Timestamp(System.currentTimeMillis()));
-        return repository.save(enforcement);
+        keyRepo.findById(e.getApiKey().getId())
+                .orElseThrow(() -> new ResourceNotFoundException("ApiKey not found"));
+
+        return repo.save(e);
     }
 
     @Override
     public RateLimitEnforcement getEnforcementById(Long id) {
-        return repository.findById(id)
-                .orElseThrow(() ->
-                        new RuntimeException("RateLimitEnforcement not found"));
+        return repo.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Enforcement not found"));
     }
 
     @Override
-    public List<RateLimitEnforcement> getAllEnforcements() {
-        return repository.findAll();
+    public List<RateLimitEnforcement> getEnforcementsForKey(Long keyId) {
+        return repo.findByApiKey_Id(keyId);
     }
 }
