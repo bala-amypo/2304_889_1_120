@@ -2,45 +2,43 @@ package com.example.demo.controller;
 
 import com.example.demo.entity.QuotaPlan;
 import com.example.demo.service.QuotaPlanService;
+
 import org.springframework.web.bind.annotation.*;
-import io.swagger.v3.oas.annotations.tags.Tag;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/api/quota-plans")
-@Tag(name="Quota Plan")
 public class QuotaPlanController {
 
-    private final QuotaPlanService quotaPlanService;
+    private final QuotaPlanService service;
 
-    public QuotaPlanController(QuotaPlanService quotaPlanService) {
-        this.quotaPlanService = quotaPlanService;
+    public QuotaPlanController(QuotaPlanService service) {
+        this.service = service;
     }
 
     @PostMapping
     public QuotaPlan create(@RequestBody QuotaPlan plan) {
-        return quotaPlanService.create(plan);
+        return service.createQuotaPlan(plan);
     }
 
     @PutMapping("/{id}")
-    public QuotaPlan update(@PathVariable Long id,
-                            @RequestBody QuotaPlan plan) {
-        return quotaPlanService.update(id, plan);
+    public QuotaPlan update(@PathVariable Long id, @RequestBody QuotaPlan plan) {
+        return service.updateQuotaPlan(id, plan);
     }
 
     @GetMapping("/{id}")
     public QuotaPlan getById(@PathVariable Long id) {
-        return quotaPlanService.getById(id);
+        return service.getQuotaPlanById(id);
     }
 
     @GetMapping
     public List<QuotaPlan> getAll() {
-        return quotaPlanService.getAll();
+        return service.getAllPlans();
     }
 
-    @DeleteMapping("/{id}")
+    @PutMapping("/{id}/deactivate")
     public void deactivate(@PathVariable Long id) {
-        quotaPlanService.deactivate(id);
+        service.deactivateQuotaPlan(id);
     }
 }

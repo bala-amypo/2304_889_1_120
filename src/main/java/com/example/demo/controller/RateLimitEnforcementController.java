@@ -2,27 +2,24 @@ package com.example.demo.controller;
 
 import com.example.demo.entity.RateLimitEnforcement;
 import com.example.demo.service.RateLimitEnforcementService;
-import io.swagger.v3.oas.annotations.tags.Tag;
+
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/api/enforcements")
-@Tag(name = "Rate Limit Enforcement")
 public class RateLimitEnforcementController {
 
     private final RateLimitEnforcementService service;
 
-    public RateLimitEnforcementController(
-            RateLimitEnforcementService service) {
+    public RateLimitEnforcementController(RateLimitEnforcementService service) {
         this.service = service;
     }
 
     @PostMapping
-    public RateLimitEnforcement create(
-            @RequestBody RateLimitEnforcement enforcement) {
-        return service.createEnforcement(enforcement);
+    public RateLimitEnforcement create(@RequestBody RateLimitEnforcement e) {
+        return service.createEnforcement(e);
     }
 
     @GetMapping("/{id}")
@@ -30,8 +27,8 @@ public class RateLimitEnforcementController {
         return service.getEnforcementById(id);
     }
 
-    @GetMapping
-    public List<RateLimitEnforcement> getAll() {
-        return service.getAllEnforcements();
+    @GetMapping("/key/{keyId}")
+    public List<RateLimitEnforcement> getForKey(@PathVariable Long keyId) {
+        return service.getEnforcementsForKey(keyId);
     }
 }

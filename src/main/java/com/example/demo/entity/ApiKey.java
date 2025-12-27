@@ -1,7 +1,6 @@
 package com.example.demo.entity;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.*;
 
 @Entity
 @Table(name = "api_keys")
@@ -11,17 +10,21 @@ public class ApiKey {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(unique=true)
     private String keyValue;
-
+    private Long ownerId;
     private boolean active = true;
 
     @ManyToOne
-    @JoinColumn(name = "quota_plan_id")
-    private QuotaPlan quotaPlan;
+    private QuotaPlan plan;
+
+    public ApiKey() {}
 
     public Long getId() {
         return id;
+    }
+
+    public void setId(Long id) {      // ✅ REQUIRED BY TESTS
+        this.id = id;
     }
 
     public String getKeyValue() {
@@ -32,6 +35,14 @@ public class ApiKey {
         this.keyValue = keyValue;
     }
 
+    public Long getOwnerId() {
+        return ownerId;
+    }
+
+    public void setOwnerId(Long ownerId) {
+        this.ownerId = ownerId;
+    }
+
     public boolean isActive() {
         return active;
     }
@@ -40,11 +51,11 @@ public class ApiKey {
         this.active = active;
     }
 
-    public QuotaPlan getQuotaPlan() {
-        return quotaPlan;
+    public QuotaPlan getPlan() {
+        return plan;
     }
 
-    public void setQuotaPlan(QuotaPlan quotaPlan) {
-        this.quotaPlan = quotaPlan;
+    public void setPlan(QuotaPlan plan) {
+        this.plan = plan;
     }
 }
